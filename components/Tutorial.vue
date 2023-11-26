@@ -62,7 +62,7 @@ export default {
 
   },
   mounted(){
-
+    this.getData()
   },
   methods:{
    async getData(){

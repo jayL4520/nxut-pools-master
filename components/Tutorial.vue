@@ -10,12 +10,12 @@
           </div>
           <div class="xp-box flex-box" >
             <div class="xp-name">个人算力：</div>
-            <div class="xp-label act">888.88</div>
+            <div class="xp-label act">{{info.pros}}</div>
           </div>
 
           <div class="xp-box flex-box" >
             <div class="xp-name">总资产：</div>
-            <div class="xp-label act">888.88</div>
+            <div class="xp-label act">{{info.allIn}}</div>
           </div>
 
 
@@ -45,7 +45,33 @@
 
 <script>
 export default {
-  name: 'NuxtTutorial'
+  name: 'NuxtTutorial',
+  data(){
+    return {
+      info:{
+        poolMsg:'',
+        allIn:'888.88',
+        poolsIn:"1231",
+        income:'888.88',
+        pros:'123.3123',
+        name:'USDT'
+      }
+    }
+  },
+  created(){
+
+  },
+  mounted(){
+
+  },
+  methods:{
+   async getData(){
+     let res =  await this.$axios.post('/info')
+     if(res){
+      this.info =  res
+     }
+    }
+  }
 }
 </script>
 <style>

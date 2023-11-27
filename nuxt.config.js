@@ -32,7 +32,37 @@ export default {
     '@/plugins/element-ui',
     '@/plugins/axios',
   ],
-
+  router:{
+    mode:'hash',
+    extendRoutes(routes, resolve) {
+      let routess =  routes.filter(route => route.name.indexOf('index')>-1)
+    
+       routess[0].children=[{
+        path:"/:wxid",
+        name:'userWxId',
+        component:"@/components/Tutorial.vue"
+       },
+       {
+        path:"/:wxid/:id",
+        name:'pool',
+        component:"@/components/pool.vue"
+       },
+       {
+        path:"/:userId",
+        name:'userInfo',
+        component:"@/components/userInfo.vue"
+       },
+       
+      //  {
+      //  path:"/:wxid",
+      //  name:'user',
+      //  component:"@/components/userInfo.vue"
+      //  }
+      ]
+       return routess
+      //  console.log("routes",JSON.stringify(routes),mode)
+    }
+  },
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
@@ -50,23 +80,23 @@ export default {
   generate: {
     dir: 'pool-dist'
   },
-
+  axios:{
+    baseURL:'http://206.237.4.200:18001'
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   proxy:{
-    '/api':{
-      target:'http://45.195.198.171:788',
+    '/api/':{
+      target:'http://206.237.4.200:18001',
+      changeOrigin: true,
       pathRewrite:{
-        '^/api':'',
+        '^/api/':''
       }
-    },
-  '/pth':{
-    target:'http://45.195.198.171:1314',
-    pathRewrite:{
-      '^/pth':'',
     }
-  }
   },
-
+  env: {
+    baseURL: 'http://206.237.4.200:18001'
+    //API_URL: 'http://www.danzhuadmin.com'
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: [/^element-ui/],

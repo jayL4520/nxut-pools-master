@@ -1,10 +1,61 @@
 <template>
-  <Tutorial/>
+  <div>
+    <div class="apge pad" v-if="$route.name=='index'">
+		<div class="__nuxt-error-page"><div class="error"><svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" fill="#DBE1EC" viewBox="0 0 48 48"><path d="M22 30h4v4h-4zm0-16h4v12h-4zm1.99-10C12.94 4 4 12.95 4 24s8.94 20 19.99 20S44 35.05 44 24 35.04 4 23.99 4zM24 40c-8.84 0-16-7.16-16-16S15.16 8 24 8s16 7.16 16 16-7.16 16-16 16z"></path></svg> <div class="title">This page could not be found</div> <p class="description"><a href="/" class="error-link nuxt-link-active">Back to the home page</a></p> <div class="logo"><a href="https://nuxtjs.org" target="_blank" rel="noopener">Nuxt</a></div></div></div>
+		
+	<!-- <div class="flex-box center marLeft marTop padTop" v-show="$route.name=='index'"><span class="padRig"> this page is 404</span>   </div> -->
+    </div>
+   
+        <nuxt-child  v-else> </nuxt-child>
+  </div>
+
 </template>
 
 <script>
 export default {
-  name: 'IndexPage'
+  name: 'IndexPage',
+  data(){
+    return {
+      nav:{
+        index:{icon:'el-icon-s-home',name:'首页'},
+        userWxId:{icon:'el-icon-s-custom',name:'个人中心'}
+      },
+      loading:false,
+	  page:1,
+	  total:0,
+      isTrue:false,
+   
+    }
+  },
+  created(){
+	if(this.$route.name!=='index'){
+		this.isTrue  = !!this.$route.params.wxid
+    }
+  },
+  mounted(opt){
+	
+    
+    // this.getCount(1)
+    this.getData(1)
+  },
+  methods:{
+   async getData(i){
+    this.state = i
+    this.loading = true
+    let url = `/index/index/get_user_list?page=${this.page}`
+    console.log("sdfs",url)
+     let res =  await this.$axios.get(url)
+     this.loading = false
+     if(res){
+      this.member =  res.data
+      this.total = res.total
+	  this.isTrue =  res.data.find(ele=>ele.wxid==this.$route.params.wxid).wxid
+	  console.log("wxid apge",res.data,this.$route.params.wxid)
+     }
+
+    
+    }
+  }
 }
 </script>
 <style>
@@ -39,7 +90,7 @@ body {
     width: 100%;
     max-width: 540px; */
     padding: 0;
-    background: var(--colorb);
+    background: #f6f6f6;
 }
 .title{
 	margin: 20px 10px 15px;
@@ -94,22 +145,22 @@ body {
 }
 /* 定义滚动条样式  不要这样设置 会影响我的样式*/
 ::-webkit-scrollbar {
-	width: 5px;
+	width: 5px !important;
 	height:  5px !important;
 	/* background-color: rgba(240, 240, 240, 1);*/
 }
 
 /*定义滚动条轨道 内阴影+圆角*/
 ::-webkit-scrollbar-track {
-	box-shadow: inset 5px 5px 5pxpx rgba(240, 240, 240, .5);
-	border-radius: 10px;
+	box-shadow: inset 5px 5px 5px rgba(240, 240, 240, .5);
+	border-radius: 5px;
 	background-color: rgba(218, 218, 218, 0.5);
 }
 
 /*定义滑块 内阴影+圆角*/
 ::-webkit-scrollbar-thumb {
-	border-radius: 10px;
-	box-shadow: inset 5px 5px 5pxpx rgba(240, 240, 240, .5);
+	border-radius: 5px;
+	box-shadow: inset 5px 5px 5px rgba(240, 240, 240, .5);
 	background-color: rgba(155, 155, 155, .5);
 
 }

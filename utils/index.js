@@ -204,7 +204,24 @@ export const formatRTime = parseDatetime
 export function isInvalidDate(date) {
   return date instanceof Date && isNaN(date.getTime())
 }
-
+export function  copy(content, $message) {
+  // 创建输入框元素
+  const input = document.createElement('input');//不会保留文本格式
+  //如果要保留文本格式，比如保留换行符，或者多行文本，可以使用  textarea 标签，再配和模板字符串 ` `
+  //const input = document.createElement('textarea')
+  // 将想要复制的值
+  input.value = content;
+  // 页面底部追加输入框
+  document.body.appendChild(input);
+  // 选中输入框
+  input.select();
+  // 执行浏览器复制命令
+  document.execCommand('Copy');
+  // 弹出复制成功信息
+  $message.success('复制成功'+content);
+  // 复制后移除输入框
+  input.remove();
+}
 // http  to https
 export function http2https(str) {
   if (!str || typeof str !== 'string') return str
@@ -250,24 +267,42 @@ export const verifyEmail = mail => {
   return reg.test(mail)
 }
 
+export const keys = {
+    msg:{
+      time:"时间",
+      remark:"备注",
+      num:"数量",
+      hash:"哈希"
+    },
+    // msg:{
+    //     time:"时间",
+    //     remark:"备注",
+    //     num:"数量",
+    //     hash:"哈希"
+    // }
+}
 // 检验邮箱
-export const opt = {bili: "比例",
+export const opt = {
+  
+  bili: "比例",
   id:'id',
   kou: "手续费",
   money : "资产",
-  name :  "名称",
+  name : "名称",
   plot  : "资产",
   wxid:"wxid",
   user:'账号',
   addr:"地址",
   type:"类型",
-
-  state  : "资产",
+  hash:"hash",
+  hashid:"HashId",
+  memo:"备注",
+  state :"资产",
   higt:"最高",
   num:'数量',
   time:"时间",
   type:"类型",
-
+  kid:'kid',
 
   // return reg
 }

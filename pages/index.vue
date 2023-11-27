@@ -608,6 +608,7 @@ li{
 }
 .tables{
   max-height:70vh;
+  min-height:400px;
   overflow-y: scroll;
 
 }

@@ -10,12 +10,12 @@
           </div>
           <div class="xp-box flex-box" >
             <div class="names xp-name">个人算力：</div>
-            <div class="xp-label act">{{Number(info.plot).toFixed(2)}}</div>
+            <div class="xp-label act">{{Number(info.plot).toFixed(4)}}</div>
           </div>
 
           <div class="xp-box flex-box" >
             <div class="names xp-name">总资产：</div>
-            <div class="xp-label act">{{Number(info.money).toFixed(2)}}</div>
+            <div class="xp-label act">{{Number(info.money).toFixed(4)}}</div>
           </div>
 
 

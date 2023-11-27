@@ -60,6 +60,7 @@ export default {
 </script>
 <style>
 :root{
+	--color:#444;
     --colora:#0097FF;
     --colorb:#FFFDEC;
     --colorc:#FF9A50;
@@ -584,8 +585,15 @@ li{
 .titl{
   min-width: 80px;
   flex:1;
+
   max-width:30%;
   padding:15px 5px;
+}
+.tables{
+	background:#f5f5f5;
+}
+.tables .sqbox{
+	background:#aac8e1;
 }
  .tables .sqbox:nth-child(2n-1){
   background:#fff;
@@ -594,22 +602,32 @@ li{
 .tables *{
   font-size:14px;
 }
-@media screen  and (max-width:780px){
-  .tableBox{
- overflow-y:scroll;
+.loadingText{
+	color:var(--coloraa);
+	margin:10% auto;
+	/* transform:translate(-50%); */
 }
+@media screen  and (max-width:780px){
+  .tableBox,.tables,.tableBox >.sqbox {
+ overflow-x:scroll !important;
+}
+
 }
 .tableBox{
   width:calc(100% - 50px);
   border-radius:5px;
   margin:5px 10px;
-  background:#aac8e1;
+  background:#e2eef7;
   /* border:1px solid #f5f5f5; */
+}
+.tabsWrap{
+	border-bottom:.5px solid #f3f3f3;
 }
 .tables{
   max-height:70vh;
-  min-height:400px;
-  overflow-y: scroll;
+  /* min-height:500px; */
+   overflow-y: scroll; 
+   overflow-x: hidden;
 
 }
 .isCli{
@@ -653,11 +671,15 @@ margin-right:20px;
   margin:0 auto;
   width:100%;
   min-height:40vh;
-  background:#c1d8e8;
+  
+  background:#c1d8e8;/*#c1d8e8;*/
   border-radius:10px;
 }
 *{
   font-size:18px;
+}
+.xp-label{
+	/* color:#f5f5f5; */
 }
 .act{
   /* color:vwhite */
@@ -666,8 +688,13 @@ margin-right:20px;
 .names{
   padding:8px 0;
 }
+.xp-act{
+	color:var(--colora);
+}
 .xp-name{
-  color:var(--colora);
+
+  color:var(--color);
+  /* color:#f5f5f5;  */
 
 }
 </style>

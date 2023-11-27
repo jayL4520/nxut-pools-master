@@ -267,19 +267,28 @@ export const verifyEmail = mail => {
   return reg.test(mail)
 }
 
-export const keys = {
-    msg:{
+export const keyOpt = {
+    liumsg:{
       time:"时间",
       remark:"备注",
       num:"数量",
       hash:"哈希"
     },
-    // msg:{
-    //     time:"时间",
-    //     remark:"备注",
-    //     num:"数量",
-    //     hash:"哈希"
-    // }
+    msg:{
+        "id": 85,
+        "hash": "293981e9875dcd2608a5979f50cbfbdf4a63b1cf30e89421ee53d5809de5e6e9", 
+        "num": "1.89521093173600000000", 
+        "state": 1, 
+        "higt": "4482907",
+        "time": 1699288139 
+
+    },
+    list:{
+    
+      id: 1,name: "测试矿池",type: 0,user: "ghostoooo1",
+      addr: "https://pool.space/account/ghostoooo1",
+
+   }
 }
 // 检验邮箱
 export const opt = {

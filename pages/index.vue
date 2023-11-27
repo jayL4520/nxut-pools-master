@@ -70,7 +70,7 @@ export default {
     --color-odd-b:#FF0000;
     --bordera:1px solid rgba(112, 112, 112, 20%);
     --basePx:15px;
-    --xsbasePx:8px;
+    --xs_basePx:8px;
 }
 .cusor{
   cursor: pointer;
@@ -602,8 +602,11 @@ li{
 .tables *{
   font-size:14px;
 }
+.el-loading-mask{
+	background:rgba(255,255,255,.55)
+}
 .loadingText{
-	color:var(--coloraa);
+	/* color:var(--coloraa); */
 	margin:10% auto;
 	/* transform:translate(-50%); */
 }
@@ -618,6 +621,7 @@ li{
   border-radius:5px;
   margin:5px 10px;
   background:#e2eef7;
+  overflow: hidden;
   /* border:1px solid #f5f5f5; */
 }
 .tabsWrap{
@@ -650,10 +654,10 @@ li{
  }
 }
 .icon, path{
-width:80px !important;
-height:80px !important;
+width:50px !important;
+height:50px !important;
 color:var(--colora);
-margin-right:20px;
+/* margin-right:20px; */
 }
 .Page >.poolPage_title{
   background:#aac8e1;

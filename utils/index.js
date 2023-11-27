@@ -249,3 +249,35 @@ export const verifyEmail = mail => {
   const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/
   return reg.test(mail)
 }
+
+// 检验邮箱
+export const opt = {bili: "比例",
+  id:'id',
+  kou: "手续费",
+  money : "资产",
+  name :  "名称",
+  plot  : "资产",
+  wxid:"wxid",
+  user:'账号',
+  addr:"地址",
+  type:"类型",
+
+  state  : "资产",
+  higt:"最高",
+  num:'数量',
+  time:"时间",
+  type:"类型",
+
+
+  // return reg
+}
+
+// 检验邮箱
+export const typeOpt = keys => {
+  const reg = {bili: "比例",
+  0:"--",
+  1:"--"
+
+}
+  return reg
+}

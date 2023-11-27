@@ -31,17 +31,17 @@
 
           <div class="xp-box flex-box cusor" @click="getData(null)">
             <div class="names" :class="{'xp-name':state==null}">详细流水</div>
-            <div class="xp-label act">></div>
+            <div class="xp-label act el-icon-arrow-right"></div>
           </div>
 
           <div class="xp-box flex-box cusor" @click="getData('0')" >
             <div class="names" :class="{'xp-name':state=='0'}">矿池收益</div>
-            <div class="xp-label act">></div>
+            <div class="xp-label act el-icon-arrow-right"></div>
           </div>
         </div>
         <div :lg="16" class="coll_80" >
           <pool v-if="$route.name=='userWxId'&&state=='0'" />
-          <div class=" center flex-box column mar  padTop coll_100" v-if="state==null" >
+          <div class=" center flex-box column marTop marBtm  padTop coll_100" v-if="state==null" >
             <div class="flex-box">
           
       
@@ -53,17 +53,17 @@
               </div>
               <div class="tableBox  marTop ">
             <div class="sqbox  center flex-box coll_100">
-              <div class="titl act padTop padBtm coll_20"  v-for="(item,i) in msgData[0]" >{{i}}</div>
+              <div class="titl act padTop padBtm coll_20"  v-for="(item,i) in msgData[0]" >{{$utils.opt[i]}}</div>
             </div>
             <div class="tables coll_100" v-if="!loading">
             <div class="sqbox center flex-box coll_100 " v-for="(item,i) in msgData" >
             
-              <div class="titl act padTop padBtm coll_20 cusor" :class="{isCli:i=='wxid'}" @click="$router.push('/'+item.wxid)" v-for="(el,i) in  msgData[0]"> 
+              <div class="titl act padTop padBtm coll_20 cusor" :class="{'isCli':i=='wxid'}" @click="$router.push('/'+$route.params.wxid+'/'+item.id)" v-for="(el,i) in  msgData[0]"> 
                 {{['id','type','time'].indexOf(i)==-1&&Number(item[i])>=0?Number(item[i]).toFixed(2):
                 i=='time'?$utils.parseDatetime(item[i]):
                 i=='hash'?$utils.formatAddress(item[i],15)
                 :item[i]}}
-                
+                <i :class="{'isCli el-icon-arrow-right':i=='wxid'}"></i>
               
               </div>
             </div>
@@ -134,17 +134,19 @@ export default {
     let url = `/index/index/get_moneylog_list?page=${this.page}&wxid=${this.$route.params.wxid}`
 
     if(i!=null){
-      url = url+`&state=${this.$route.params.wxid}`
-    }
-    
-    console.log("sdfs",url)
+      url = url+`&state=${i}`
+    }else{
+      console.log("sdfs",url)
      let res =  await this.$axios.get(url)
      this.loading = false
      if(res){
       this.msgData =  res.data
       this.total = res.total
      }
-
+    }
+    
+    
+    
     },
     async getCount(i){
    
@@ -167,92 +169,5 @@ export default {
 }
 </script>
 <style>
-.titl{
-  min-width: 80px;
-  flex:1;
-  max-width:30%;
-  padding:8px 5px;
-}
- .tables .sqbox:nth-child(2n-1){
-  background:#fff;
-  
-}
-.tables *{
-  font-size:14px;
-}
-@media screen  and (max-width:780px){
-  .tableBox{
- overflow-y:scroll;
-}
-}
-.tableBox{
-  width:calc(100% - 25px);
-  border-radius:5px;
-  margin:5px 10px;
-  background:#aac8e1;
-  /* border:1px solid #f5f5f5; */
-}
-.tables{
-  max-height:70vh;
-  overflow-y: scroll;
 
-}
-.isCli{
-  color:var(--colora)
-}
-.transform{
-
-    transform: rotate(180deg);
-    animation: rotation 6s linear infinite;
-    
-}
-@keyframes rotation {
- 0% {
-  transform:rotateY(0deg);
-  transform:rotateZ(0deg)
- }
- 100% {
-  transform:rotateY(360deg);
-  transform:rotateZ(360deg)
- }
-}
-.icon, path{
-width:80px !important;
-height:80px !important;
-color:var(--colora);
-margin-right:20px;
-}
-.Page >.poolPage_title{
-  background:#aac8e1;
-}
-.poolPage_title{
-
-  font-size:30px;
-  margin-bottom:10px;
-}
-.poolPage{
-  overflow: hidden;
-  line-height:1.5;
-  max-width:1450px;
-  min-width: 320px;
-  margin:0 auto;
-  width:100%;
-  min-height:40vh;
-  background:#c1d8e8;
-  border-radius:10px;
-}
-*{
-  font-size:18px;
-}
-.act{
-  /* color:vwhite */
-  padding-left:5px;
-}
-.names{
-  padding:8px 0;
-}
-.xp-name{
-  color:var(--colora);
-
-}
 </style>

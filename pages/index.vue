@@ -660,11 +660,11 @@ color:var(--colora);
 /* margin-right:20px; */
 }
 .Page >.poolPage_title{
-  background:#aac8e1;
+  background:#55abf2;
 }
 .poolPage_title{
 
-  font-size:30px;
+  font-size:25px;
   margin-bottom:10px;
 }
 .poolPage{
@@ -674,7 +674,7 @@ color:var(--colora);
   min-width: 320px;
   margin:0 auto;
   width:100%;
-  min-height:40vh;
+  /* min-height:40vh; */
   
   background:#c1d8e8;/*#c1d8e8;*/
   border-radius:10px;

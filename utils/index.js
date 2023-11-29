@@ -27,17 +27,65 @@ export function formatAddress(address, length = 20) {
 // 格式化时间  YYYY/MM/DD HH:mm:ss
 export function parseDate(val, format = 'YYYY-MM-DD HH:mm') {
   if (!val) return ''
-  val = +val
+
+  val = Number(val)
+  if(Number(val)){
+    val = new Date(val)
+   
+  }
   return moment(val).format(format)
 }
 
 // 格式化时间  YYYY/MM/DD HH:mm:ss
 export function parseDatetime(val, format) {
   return parseDate(val, format || 'YYYY-MM-DD HH:mm:ss')
+  
 }
 
+export function parseTime(time, cFormat) {
+
+  if (arguments.length === 0) {
+    return null
+  }
+  const format = cFormat || '{y}-{m}-{d} {h}:{i}:{s}'
+  let date
+  if (typeof time === 'object') {
+    date = time
+  } else {
+    if ((typeof time === 'string') && (/^[0-9]+$/.test(time))) {
+      time = parseInt(time)
+    }
+    if ((typeof time === 'number') && (time.toString().length === 10)) {
+      time = time * 1000
+    }
+    date = new Date(time)
+  }
+  const formatObj = {
+    y: date.getFullYear(),
+    m: date.getMonth() + 1,
+    d: date.getDate(),
+    h: date.getHours(),
+    i: date.getMinutes(),
+    s: date.getSeconds(),
+    a: date.getDay()
+  }
+  let time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g, (result, key) => {
+    let value = formatObj[key]
+    // Note: getDay() returns 0 on Sunday
+    if (key === 'a') {
+      return ['日', '一', '二', '三', '四', '五', '六'][value]
+    }
+    if (result.length > 0 && value < 10) {
+      value = '0' + value
+    }
+    return value || 0
+  })
+  time_str = time_str === '0-0-0 0:0:0' ? '' : time_str
+  return time_str
+}
 // 格式化时间  YYYY/MM/DD
 export function parseDates(val, format) {
+
   return parseDate(val, format || 'YYYY-MM-DD')
 }
 
@@ -198,7 +246,7 @@ export function getDateList(n = 30, type = 'day') {
 }
 
 // 2020-06-27T14:20:27.000000Z 时间格式转换成 2020-06-27 14:20:27
-export const formatRTime = parseDatetime
+export const formatRTime = parseTime
 
 // 判断日期是非法的
 export function isInvalidDate(date) {
@@ -275,12 +323,15 @@ export const keyOpt = {
       hash:"哈希"
     },
     msg:{
+      "time": 1699288139 ,
+      "higt": "4482907",
+      "num": "1.89521093173600000000", 
         "id": 85,
         "hash": "293981e9875dcd2608a5979f50cbfbdf4a63b1cf30e89421ee53d5809de5e6e9", 
-        "num": "1.89521093173600000000", 
+    
         "state": 1, 
-        "higt": "4482907",
-        "time": 1699288139 
+      
+     
 
     },
     list:{

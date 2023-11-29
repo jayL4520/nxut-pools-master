@@ -60,7 +60,7 @@ export default {
 </script>
 <style>
 :root{
-	--color:#444;
+	--color:#555;
     --colora:#0097FF;
     --colorb:#FFFDEC;
     --colorc:#FF9A50;
@@ -583,10 +583,15 @@ li{
 
 
 .titl{
-  min-width: 80px;
-  flex:1;
+  /* min-width: 100px;
+  flex:1; */
+  overflow: hidden;
+    /* line-height: 1.5; */
+    /* text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1; */
 
-  max-width:30%;
+  /* max-width:30%; */
   padding:15px 5px;
 }
 .tables{
@@ -600,7 +605,7 @@ li{
   
 }
 .tables *{
-  font-size:14px;
+  font-size:13px;
 }
 .el-loading-mask{
 	background:rgba(255,255,255,.55)
@@ -610,21 +615,19 @@ li{
 	margin:10% auto;
 	/* transform:translate(-50%); */
 }
-@media screen  and (max-width:780px){
-  .tableBox,.tables,.tableBox >.sqbox {
- overflow-x:scroll !important;
-}
-
+.tableDiv {
+	padding:10px;
 }
 .tableBox{
-  width:calc(100% - 50px);
+  /* width:calc(100% - 50px); */
   border-radius:5px;
-  margin:5px 10px;
+  margin:5px 0;
   background:#e2eef7;
   overflow: hidden;
   /* border:1px solid #f5f5f5; */
 }
 .tabsWrap{
+	width:100%;
 	border-bottom:.5px solid #f3f3f3;
 }
 .tables{

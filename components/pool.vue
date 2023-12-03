@@ -34,7 +34,7 @@
               <div class="titl act padTop padBtm coll_20 cusor" :class="{
                 isSamll:['id','num','money'].indexOf(i)>-1,
                 isCli:['hash','name','addr'].indexOf(i)>-1
-                }" @click="toClick(item)"
+                }" @click="toClick(item,i)"
                v-for="(el,i) in  $utils.keyOpt[$route.params.id?'msg':'list']"  v-show="['kid','type'].indexOf(i)==-1" >  {{['id','kid','type','time','hashid'].indexOf(i)==-1&&Number(item[i])>=0?Number(item[i]).toFixed(4):
                 i=='time'?$utils.parseTime(item[i]):
                 ['hash','addr'].indexOf(i)>-1?$utils.formatAddress(item[i],25)
@@ -113,8 +113,13 @@ export default {
     this.state = 1
   },
   methods:{
-    toClick(item){
+    toClick(item,i){
       if(!this.$route.params.id){
+     
+        if(i=='addr'&&item.addr){
+
+          return window.open(item.addr)
+        }
         this.$router.push('/'+this.$route.params.wxid+'/'+item.id)
       }else{
         this.$utils.copy(item.hash,this.$message)

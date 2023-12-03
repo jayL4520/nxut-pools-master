@@ -23,8 +23,7 @@ export default {
       loading:false,
 	  page:1,
 	  total:0,
-      isTrue:false,
-   
+      isTrue:false
     }
   },
   created(){

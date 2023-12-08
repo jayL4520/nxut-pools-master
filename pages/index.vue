@@ -703,4 +703,89 @@ color:var(--colora);
   /* color:#f5f5f5;  */
 
 }
+
+
+
+
+.navIcon{
+  font-size:30px
+}
+ @media screen  and (max-width:780px){
+  /* .tableBox,.tables,.tableBox >.sqbox {
+ overflow-x:scroll !important;
+ .   
+}   */
+body .icon{
+  width:30px !important;
+  height:30px !important;
+}
+body .poolPage_title {
+  font-size:20px;
+  background:#aacae5 !important;
+}
+body  .navIcon{
+  font-size:24px
+}
+body .tableDiv.pools{
+  overflow-x:scroll !important;
+}
+body .tableDiv.pools .tableBox{
+  width:550px;
+  margin:0;
+}
+
+body .tableDiv .isSamll{
+  width:70px;
+}
+.tabsWrap{
+
+}
+body .tableDiv {
+  width:100%;
+  padding:0;
+   /* overflow-x:scroll; */
+}
+body .sqbox.center{
+  justify-content:initial;
+
+}
+.nav >.xp-box{
+  border-radius:5px;
+  margin:0 8px;
+  padding:0 5px;
+}
+.nav .xp-act1{
+  background:rgba(85 ,171, 242,.5);
+}
+.nav .name{
+  padding:5px;
+}
+
+body .titl{
+ width:130px;
+
+
+}
+
+.xp-box{
+  /* width:40%; */
+  padding:0 5px;
+  
+  min-width: 80px;
+  
+}
+html *{
+  font-size:14px;
+}
+.Page{
+  /* padding:10px; */
+}
+.poolPage{
+  padding:0 !important;
+}
+
+.poolPage >div{
+  padding:10px;
+}
+}
 </style>

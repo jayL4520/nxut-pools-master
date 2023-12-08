@@ -329,7 +329,7 @@ export const keyOpt = {
         "id": 85,
         "hash": "293981e9875dcd2608a5979f50cbfbdf4a63b1cf30e89421ee53d5809de5e6e9", 
     
-        "state": 1, 
+        // "state": 1, 
       
      
 
@@ -347,7 +347,7 @@ export const opt = {
   bili: "比例",
   id:'id',
   kou: "手续费",
-  money : "资产",
+  // money : "资产",
   name : "名称",
   plot  : "资产",
   wxid:"wxid",
@@ -357,7 +357,7 @@ export const opt = {
   hash:"hash",
   hashid:"HashId",
   memo:"备注",
-  state :"资产",
+  // state :"资产",
   higt:"最高",
   num:'数量',
   time:"时间",

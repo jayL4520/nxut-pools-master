@@ -3,7 +3,7 @@
 /* eslint-disable prettier/prettier */
 // import accounting from 'accounting'
 import moment from 'moment'
-
+import { Message } from 'element-ui';
 // 格式化金钱 $12,345,678.00
 // export function parseMoney(val) {
 //   if (!val) return ''
@@ -252,6 +252,7 @@ export const formatRTime = parseTime
 export function isInvalidDate(date) {
   return date instanceof Date && isNaN(date.getTime())
 }
+
 export function  copy(content, $message) {
   // 创建输入框元素
   const input = document.createElement('input');//不会保留文本格式
@@ -266,7 +267,10 @@ export function  copy(content, $message) {
   // 执行浏览器复制命令
   document.execCommand('Copy');
   // 弹出复制成功信息
+  Message.closeAll()
   $message.success('复制成功'+content);
+
+ 
   // 复制后移除输入框
   input.remove();
 }
@@ -316,26 +320,28 @@ export const verifyEmail = mail => {
 }
 
 export const keyOpt = {
-    liumsg:{
+   liumsg:{
       time:"时间",
-      remark:"备注",
-      num:"数量",
-      hash:"哈希"
+      memo:"备注",
+      money:"收益",
+      hashid:"哈希"
+    },
+    dayMsg:{
+      time:'日期',
+      money:'收益',
+      total:'总额',
+      // id:'id',
     },
     msg:{
       "time": 1699288139 ,
       "higt": "4482907",
       "num": "1.89521093173600000000", 
-        "id": 85,
-        "hash": "293981e9875dcd2608a5979f50cbfbdf4a63b1cf30e89421ee53d5809de5e6e9", 
+      "id": 85,
+      "hash": "293981e9875dcd2608a5979f50cbfbdf4a63b1cf30e89421ee53d5809de5e6e9", 
     
         // "state": 1, 
-      
-     
-
     },
     list:{
-    
       id: 1,name: "测试矿池",type: 0,user: "ghostoooo1",
       addr: "https://pool.space/account/ghostoooo1",
 
@@ -347,9 +353,12 @@ export const opt = {
   bili: "比例",
   id:'id',
   kou: "手续费",
-  // money : "资产",
+  money : "资产",
   name : "名称",
   plot  : "资产",
+  iconme :'收益',
+  total:"总额",
+    day:'日期',
   wxid:"wxid",
   user:'账号',
   addr:"地址",

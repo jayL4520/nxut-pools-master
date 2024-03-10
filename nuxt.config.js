@@ -40,16 +40,35 @@ export default {
        routess[0].children=[{
         path:"/:wxid",
         name:'userWxId',
-        component:"@/components/Tutorial.vue"
+        meta:{
+          title:"个人中心"
+        },
+        component:"@/components/person.vue"
        },
        {
         path:"/:wxid/:id",
         name:'pool',
+        meta:{
+          title:"矿池收益"
+        },
         component:"@/components/pool.vue"
        },
        {
+        path:"/:wxid/:id/:date",
+        name:'liuMsg',
+        meta:{
+          title:"流水明细"
+        },
+    
+        component:"@/components/liuMsg.vue"
+       },
+       
+       {
         path:"/:userId",
         name:'userInfo',
+        meta:{
+          title:"用户详情"
+        },
         component:"@/components/userInfo.vue"
        },
        
@@ -59,6 +78,7 @@ export default {
       //  component:"@/components/userInfo.vue"
       //  }
       ]
+ 
        return routess
       //  console.log("routes",JSON.stringify(routes),mode)
     }

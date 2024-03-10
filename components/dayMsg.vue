@@ -1,6 +1,7 @@
 <!-- Please remove this file from your project -->
 <template>
   <div class="Page marBtm poolPage" >
+   
     <div class="poolPage_title titls pad t-center flex-box center white bold" v-if="$route.name=='pool'">
        <i   style="font-size:30px" :class="[nav[$route.name].icon||'el-icon-s-home']"></i>
        
@@ -23,24 +24,31 @@
               </div>
               <div class="tableDiv " :class="{pools:$route.params.id}">
               <div class="tableBox  marTop ">
-            <div class="sqbox  center flex-box coll_100">
-              
-              <div class="titl act padTop padBtm coll_20" :class="{isSamll:['id','num','money'].indexOf(i)>-1}" v-show="['kid','type'].indexOf(i)==-1" v-for="(item,i) in $utils.keyOpt[$route.params.id?'msg':'list']" >{{$utils.opt[i]}}</div>
+                <!-- {{msgData[0]}} -->
+            <div class="sqbox  evenly flex-box coll_100">
+             
+              <div class="titl act padTop padBtm coll_20"  :class="{isSamll:['id','num','money'].indexOf(i)>-1}"
+                 
+                v-for="(item,i) in $utils.keyOpt['dayMsg']" >{{item}}</div>
             </div>
             <div class="tables coll_100" >
               <div class="tabsWrap" v-if="!loading">
-            <div class="sqbox center flex-box coll_100 " v-for="(item,i) in msgData" >
+            <div class="sqbox evenly flex-box coll_100 " v-for="(item,i) in msgData" >
             
               <div class="titl act padTop padBtm coll_20 cusor" :class="{
                 isSamll:['id','num','money'].indexOf(i)>-1,
-                isCli:['hash','name','addr'].indexOf(i)>-1
+                isCli:['hash','name','addr','time'].indexOf(i)>-1
                 }" @click="toClick(item,i)"
-               v-for="(el,i) in  $utils.keyOpt[$route.params.id?'msg':'list']"  v-show="['kid','type'].indexOf(i)==-1" >  {{['id','kid','type','time','hashid'].indexOf(i)==-1&&Number(item[i])>=0?Number(item[i]).toFixed(4):
-                i=='time'?$utils.parseTime(item[i]):
+               v-for="(el,i) in  $utils.keyOpt.dayMsg" 
+               
+              
+               
+               >  {{['id','kid','type','time','hashid'].indexOf(i)==-1&&Number(item[i])>=0?Number(item[i]).toFixed(4):
+                i=='time'?$utils.parseTime(item[i],'{y}-{m}-{d}'):
                 ['hash','addr'].indexOf(i)>-1?$utils.formatAddress(item[i],25)
-                :item[i]}}
+                :item[i]||'--'}}
                      <i @click.stop="!$route.params.id?$utils.copy(item['addr'],$message):$utils.copy(item['hash'],$message)" :class="{'isCli el-icon-document-copy':['hash','addr'].indexOf(i)>-1}"></i>
-                     <i :class="{'isCli el-icon-arrow-right':i=='name'}"></i> 
+                     <i :class="{'isCli el-icon-arrow-right':i=='time'}"></i> 
               </div>
             </div>
           </div>
@@ -63,8 +71,8 @@
           <el-pagination   style="border-radius:10px;overflow: hidden; padding:0;"
               layout="prev,pager,next" 
               @current-change="getData"
+              :pager-count="count"
               @size-change="getData"
-              :pager-count="5"
               :total="total">
             </el-pagination>
           </div>
@@ -76,7 +84,7 @@
 
 <script>
 export default {
-  name: 'NuxtTutorial',
+  name: 'dayMsg',
   data(){
     return {
       nav:{
@@ -85,6 +93,7 @@ export default {
         pool:{icon:'el-icon-s-order',name:'明细'}
       },
       total:0,
+      count:5,
       page:1,
       state:'',
       msgData:[],
@@ -102,8 +111,9 @@ export default {
       titleS:['']
     }
   },
-  created(){
 
+  created(){
+console.log("pagerCount",this.$parent)
   },
   mounted(opt){
     if(this.$route.name!=='index'){
@@ -115,37 +125,34 @@ export default {
   },
   methods:{
     toClick(item,i){
-      if(!this.$route.params.id){
-     
-        if(i=='addr'&&item.addr){
-
-          return window.open(item.addr)
+  
+      this.$router.push({
+        name:'liuMsg',
+        params:{
+          wxid:this.$route.params.wxid,
+          id:item.id,
+          date:item.timedate
         }
-        this.$router.push('/'+this.$route.params.wxid+'/'+item.id)
-      }else{
-        this.$utils.copy(item.hash,this.$message)
-      }
-     
+      })  
     },
-   async getData(){
-   
+    async getData(i){
+    this.page = 1
+    this.state = i
     this.loading = true
-    let url = `/index/index/kuang_list?state=${this.state}&wxid=${this.$route.params.wxid}&page=${this.page}`
-
-    if(this.$route.params.id){
-      // debugger
-      url = `/index/index/hashlog_list?kid=${this.$route.params.id}&page=${this.page}`
-    }
-    
-    console.log("sdfs",url)
+    let url = `/index/index/get_moneylog_list?page=${this.page}&wxid=${this.$route.params.wxid}`+"&isday=1"
      let res =  await this.$axios.get(url)
      this.loading = false
      if(res){
-      this.msgData =  res.data
-      this.total = res.total
-      this.page = res.last_page
+         this.isTrue = true
+        //  this.info =  res.data[0]
+        // res.data[0].total =1
+         this.msgData =  res.data
+         this.total = res.total
+        // if(!i){
+        //   this.gethashlog_list()
+        // }  
      }
-
+    
     },
    
   }

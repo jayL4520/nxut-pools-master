@@ -4,6 +4,7 @@
 // import accounting from 'accounting'
 import moment from 'moment'
 import { Message } from 'element-ui';
+import tableConfigs from "./tableConfig"
 // 格式化金钱 $12,345,678.00
 // export function parseMoney(val) {
 //   if (!val) return ''
@@ -347,6 +348,8 @@ export const keyOpt = {
 
    }
 }
+
+export const tableConfig  = tableConfigs
 // 检验邮箱
 export const opt = {
   

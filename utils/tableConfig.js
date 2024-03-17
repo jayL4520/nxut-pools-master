@@ -1,70 +1,113 @@
-export const keyOpt = {
-    liumsg:{
+import {parseTime,toFixed,formatAddress} from '@/utils'
+console.log("render",{parseTime,formatAddress})
+
+export default {
+    liuMsg:{
        time:{
         label:"时间",
         icon:'el-icon-arrow-right',
-       
+        type:'time',
+        isCli:true,
+        render(e){
+           return  parseTime(e,'{y}-{m}-{d}')
+        },
+        // isCli:true
        },
        memo:{
         label:"备注",
         // icon:'el-icon-arrow-right',
        
        },
-       time:{
+       money:{
         label:"收益",
-        icon:'el-icon-arrow-right',
+        // icon:'el-icon-arrow-right',
+        type:'number',
+        render(e){
+            return  toFixed(e)
+         },
       
        },
-       time:{
+       hashid:{
         label:"哈希",
-       
+        render(e){
+            return  formatAddress(e,25)
+         },
        },
-       memo:"备注",
-       money:"收益",
-       hashid:"哈希"
+ 
      },
      dayMsg:{
        
         time:{
             label:"日期",
             icon:'el-icon-arrow-right',
+            isCli:true,
+            render(e){
+                return  parseTime(e,'{y}-{m}-{d}')
+             },
+            type:'day'
            },
          money:{
             label:"收益",
+            type:'number',
+            render(e){
+            return  toFixed(e)
+         },
             // icon:'el-icon-arrow-right',
            
         },
         total:{
             label:"总额",
-            icon:'el-icon-arrow-right',
+    
+            type:'number',
+            render(e){
+                return  toFixed(e)
+             },
         },
        // id:'id',
      },
      msg:{
        
         id:{
-            label:"日期",
+            label:"id",
             isSmall:true,
+           
            },
         time:{
             label:"日期",
             icon:'el-icon-arrow-right',
+            render(e){
+                return  parseTime(e,'{y}-{m}-{d}')
+             },
+            isCli:true,
+            type:'time'
            },
         higt:{
             label:"收益",
+            type:'number',
+            render(e){
+                return  toFixed(e)
+             },
             // icon:'el-icon-arrow-right',
         },
         num:{
             label:"数量",
+            type:'number'
+            ,
+            render(e){
+                return  toFixed(e)
+             },
      
         },
         hash:{
-            label:"数量",
+            label:"hash",
             icon:'el-icon-document-copy',
+        render(e){
+            return  formatAddress(e,25)
+         },
         }
      },
      
-     list:{   
+     pool:{   
      id:{
         label:"id",
         isSmall:true,
@@ -72,6 +115,7 @@ export const keyOpt = {
        name:{
         label:"测试矿池",
         icon:'el-icon-arrow-right',
+        isCli:true,
        },
        type:{
         label:"收益",
@@ -83,6 +127,7 @@ export const keyOpt = {
     },
     addr:{
         label:"地址",
+        isCli:true,
         icon:'el-icon-document-copy',
     }
     }

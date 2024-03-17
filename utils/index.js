@@ -11,7 +11,7 @@ import tableConfigs from "./tableConfig"
 //   return accounting.formatMoney(val, '￥')
 // }
 export function formatAddress(address, length = 20) {
-  if (address) {
+  if (address&&address.length>12) {
     if (address.length <= length) {
       return address
     }
@@ -22,7 +22,7 @@ export function formatAddress(address, length = 20) {
     let end = address.substring(address.length - endNum, address.length)
     return start + "..." + end
   } else {
-    return null
+    return address
   }
 }
 // 格式化时间  YYYY/MM/DD HH:mm:ss
@@ -245,6 +245,14 @@ export function getDateList(n = 30, type = 'day') {
   }
   return range
 }
+// n天前
+export function toFixed(n) {
+
+  let num = Number(n)&&Number(n).toFixed(4)||'--'
+  console.log('num',num)
+  return num 
+}
+
 
 // 2020-06-27T14:20:27.000000Z 时间格式转换成 2020-06-27 14:20:27
 export const formatRTime = parseTime
@@ -269,7 +277,7 @@ export function  copy(content, $message) {
   document.execCommand('Copy');
   // 弹出复制成功信息
   Message.closeAll()
-  $message.success('复制成功'+content);
+  Message.success('复制成功'+content);
 
  
   // 复制后移除输入框

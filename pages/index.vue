@@ -583,7 +583,13 @@ li{
 
 
 
-
+.textOv{
+	overflow: hidden;
+	display: -webkit-inline-box;
+    
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
 .titl{
   /* min-width: 100px;
   flex:1; */
@@ -765,7 +771,7 @@ body .sqbox.center{
 }
 
 body .titl{
- width:130px;
+ width:135px;
 
 
 }

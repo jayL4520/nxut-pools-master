@@ -1,22 +1,28 @@
 <!-- Please remove this file from your project -->
 <template>
     <div class="tableCom">
-        <div class="tableDiv " :class="{pools:$route.params.id}">
+        <div class="tableDiv " :class="{
+            pools:$route.params.id
+        }">
             <div class="tableBox  marTop ">
                 <!-- head -->
                 <div class="sqbox  evenly flex-box coll_100">
-                    <div class="titl act padTop padBtm coll_20" :class="{isSamll:item.isSamll}" :key="i"
-                        v-for="(item,i) in keyOpt">{{item}}</div>
+                    <div class="titl act padTop padBtm coll_20" :class="{isSamll:item.isSmall}" :key="i"
+                        v-for="(item,i) in keyOpt">{{item.label}}</div>
                 </div>
                 <div class="tables coll_100">
                     <div class="tabsWrap" v-if="!loading">
                         <div class="sqbox evenly flex-box coll_100 " :key="i" v-for="(item,i) in tableData">
 
-                            <div class="titl act padTop padBtm coll_20 cusor" :class="{
-                  isSamll:keyOpt[i].isSamll,
+                            <div class="titl flex-box center act padTop padBtm coll_20 cusor" :class="{
+                  isSamll:keyOpt[i].isSmall,
                   isCli:keyOpt[i].isCli
-                  }" @click="toClick(item,i)" :key="i" v-for="(el,i) in  $keyOpt"> {{item[i]||'--'}}
-                                <i @click.stop="keyOpt[i].iconClick"
+                  }" @click="toClick(item,i)" :key="i" v-for="(el,i) in  keyOpt"> 
+                  
+                  <span class=" textOv">{{keyOpt[i].render?keyOpt[i].render(item[i]) : item[i]||'--'}}</span>
+
+
+                                <i class="" @click.stop="keyOpt[i].iconClick?keyOpt[i].iconClick():iconClick(item[i])"
                                     :class="{['isCli '+keyOpt[i].icon]:keyOpt[i].icon}"></i>
                             </div>
                         </div>
@@ -47,17 +53,14 @@
         data() {
             return {
                 limit: 25,
-                total: 0,
                 count: 5,
                 page: 1,
-                msgData: [],
-                loading: false,
                 // {"money":648.115939,"plot":13425.26}   
                 isTrue: false,
                 titleS: ['']
             }
         },
-        props: ['tableData'],
+        props: ['tableData','configKey','total','loading'],
         created() {
             console.log("pagerCount", this.$parent)
         },
@@ -70,6 +73,9 @@
             toClick(item, i) {
 
                 this.$emit('toClick', arguments)
+            },
+            iconClick(text){
+                this.$utils.copy(text,this.$message)
             },
             sizeChange() {
                 console.log("sizeChange", arguments)

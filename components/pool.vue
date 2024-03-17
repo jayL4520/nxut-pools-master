@@ -9,7 +9,7 @@
       <div class="flex-box center marLeft" v-show="$route.name!=='index'">    <el-button size="mini" type="warning" @click="$router.push('/'+$route.params.wxid)">返回</el-button> </div>
     </div>
         <div  class="coll_100 marBtm" >
-          {{msgData}}123
+       
           <tables @toClick="toClick" 
             :loading="loading" 
             :total="total"

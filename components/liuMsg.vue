@@ -29,19 +29,19 @@
               </div>
               <div class="tables coll_100" >
                 <div class="tabsWrap" v-if="!loading">
-              <div class="sqbox center flex-box coll_100 " v-for="(item,i) in msgData" >
+              <div class="sqbox center flex-box coll_100 " :key="i"  v-for="(item,i) in msgData" >
               
                 <div class="titl act padTop padBtm coll_20 cusor" :class="{
                   isSamll:['id','num','money'].indexOf(i)>-1,
-                  isCli:['hashid','name','addr'].indexOf(i)>-1
-                  }" @click="$utils.copy(item['hashid'],$message)"
-                 v-for="(el,i) in  $utils.keyOpt.liumsg"  v-show="['kid','type'].indexOf(i)==-1" > 
-                  {{['id','kid','type','time','hashid'].indexOf(i)==-1&&Number(item[i])>=0?Number(item[i]).toFixed(4):
+                  isCli:['name','addr'].indexOf(i)>-1
+                  }" @click="toClick"
+                 v-for="(el,i) in  $utils.keyOpt.liumsg" :key="i"  v-show="['kid','type'].indexOf(i)==-1" > 
+                  {{['id','kid','type','time','hashid'].indexOf(i)==-1&&item[i]!=undefined&&Number(item[i])>=0?Number(item[i]).toFixed(4):
                   i=='time'?$utils.parseTime(item[i]):
                   ['hash','addr'].indexOf(i)>-1?$utils.formatAddress(item[i],25)
                   :item[i]||'--'}}
                        <i @click.stop="$utils.copy(item['hashid'],$message)" 
-                       :class="{'isCli el-icon-document-copy':['hashid','addr'].indexOf(i)>-1}"></i>
+                       :class="{'isCli el-icon-document-copy':['addr'].indexOf(i)>-1}"></i>
                        <i :class="{'isCli el-icon-arrow-right':i=='name'}"></i> 
                 </div>
               </div>
@@ -77,7 +77,7 @@
   </div>
   </template>
   
-  <script>
+  <script nuxt-no-cache>
   export default {
     name: 'NuxtTutorial',
     data(){
@@ -119,16 +119,16 @@
     },
     methods:{
       toClick(item,i){
-        if(!this.$route.params.id){
+        // if(!this.$route.params.id){
        
-          if(i=='addr'&&item.addr){
+        //   if(i=='addr'&&item.addr){
   
-            return window.open(item.addr)
-          }
-          this.$router.push('/'+this.$route.params.wxid+'/'+item.id)
-        }else{
-          this.$utils.copy(item.hash,this.$message)
-        }
+        //     return window.open(item.addr)
+        //   }
+        //   this.$router.push('/'+this.$route.params.wxid+'/'+item.id)
+        // }else{
+        //   // this.$utils.copy(item.hash,this.$message)
+        // }
        
       },
       currentChange(e){

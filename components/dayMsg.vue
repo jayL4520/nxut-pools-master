@@ -28,22 +28,18 @@
             <div class="sqbox  evenly flex-box coll_100">
              
               <div class="titl act padTop padBtm coll_20"  :class="{isSamll:['id','num','money'].indexOf(i)>-1}"
-                 
-                v-for="(item,i) in $utils.keyOpt['dayMsg']" >{{item}}</div>
+                :key="i"   v-for="(item,i) in $utils.keyOpt['dayMsg']" >{{item}}</div>
             </div>
             <div class="tables coll_100" >
               <div class="tabsWrap" v-if="!loading">
-            <div class="sqbox evenly flex-box coll_100 " v-for="(item,i) in msgData" >
+            <div class="sqbox evenly flex-box coll_100 " :key="i" v-for="(item,i) in msgData" >
             
               <div class="titl act padTop padBtm coll_20 cusor" :class="{
                 isSamll:['id','num','money'].indexOf(i)>-1,
                 isCli:['hash','name','addr','time'].indexOf(i)>-1
                 }" @click="toClick(item,i)"
                v-for="(el,i) in  $utils.keyOpt.dayMsg" 
-               
-              
-               
-               >  {{['id','kid','type','time','hashid'].indexOf(i)==-1&&Number(item[i])>=0?Number(item[i]).toFixed(4):
+               >  {{['money','total'].indexOf(i)>-1&&item[i]&&Number(item[i])?Number(item[i]).toFixed(4):
                 i=='time'?$utils.parseTime(item[i],'{y}-{m}-{d}'):
                 ['hash','addr'].indexOf(i)>-1?$utils.formatAddress(item[i],25)
                 :item[i]||'--'}}
@@ -83,7 +79,7 @@
 </div>
 </template>
 
-<script>
+<script nuxt-no-cache>
 export default {
   name: 'dayMsg',
   data(){
@@ -158,6 +154,7 @@ console.log("pagerCount",this.$parent)
          this.isTrue = true
         //  this.info =  res.data[0]
         // res.data[0].total =1
+  
          this.msgData =  res.data
          this.total = res.total
         //  this.page +=1

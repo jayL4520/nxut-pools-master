@@ -7,7 +7,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'pools',
+    title: 'Pools',
     htmlAttrs: {
       lang: 'en'
     },
@@ -36,14 +36,15 @@ export default {
     mode:'hash',
     extendRoutes(routes, resolve) {
       let routess =  routes.filter(route => route.name.indexOf('index')>-1)
-    
+      routess[0].noCache = true
        routess[0].children=[{
         path:"/:wxid",
         name:'userWxId',
         meta:{
           title:"个人中心"
         },
-        component:"@/components/person.vue"
+        component:"@/components/person.vue",
+        noCache: true
        },
        {
         path:"/:wxid/:id",
@@ -51,6 +52,7 @@ export default {
         meta:{
           title:"矿池收益"
         },
+        noCache: true,
         component:"@/components/pool.vue"
        },
        {
@@ -59,13 +61,14 @@ export default {
         meta:{
           title:"流水明细"
         },
-    
+        noCache: true,
         component:"@/components/liuMsg.vue"
        },
        
        {
         path:"/:userId",
         name:'userInfo',
+        noCache: true,
         meta:{
           title:"用户详情"
         },

@@ -67,7 +67,7 @@
 </div>
 </template>
 
-<script>
+<script nuxt-no-cache>
 export default {
   name: 'NuxtTutorial',
   data(){

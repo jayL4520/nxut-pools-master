@@ -34,7 +34,7 @@
               <div class="titl act padTop padBtm coll_20 cusor" :class="{
                 isSamll:['id','num','money'].indexOf(i)>-1,
                 isCli:['hash','name','addr'].indexOf(i)>-1
-                }" @click="toClick(item,i)"
+                }" @click="toClick(item,i)" :key="i"
                v-for="(el,i) in  $utils.keyOpt[$route.params.id?'msg':'list']"  v-show="['kid','type'].indexOf(i)==-1" >  {{['id','kid','type','time','hashid'].indexOf(i)==-1&&Number(item[i])>=0?Number(item[i]).toFixed(4):
                 i=='time'?$utils.parseTime(item[i]):
                 ['hash','addr'].indexOf(i)>-1?$utils.formatAddress(item[i],25)

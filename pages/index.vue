@@ -7,14 +7,12 @@
 		
 	<!-- <div class="flex-box center marLeft marTop padTop" v-show="$route.name=='index'"><span class="padRig"> this page is 404</span>   </div> -->
     </div>
-	<nuxt-child  v-else> </nuxt-child>
-	
-        
+	<nuxt  v-else> </nuxt>
   </div>
 
 </template>
 
-<script>
+<script nuxt-no-cache>
 export default {
   name: 'IndexPage',
   data(){

@@ -90,8 +90,10 @@
      let url = `/index/index/get_moneylog_list?page=${this.page}&wxid=${this.$route.params.wxid}`+"&date="+this.$route.params.date
       
       
-      console.log("sdfs",url)
-       let res =  await this.$axios.get(url)
+    
+        let res =  await this.$axios.get(url)
+    
+      console.log("sdfs",res)
        this.loading = false
        if(res){
         this.msgData =  res.data

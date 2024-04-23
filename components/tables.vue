@@ -15,15 +15,15 @@
                         <div class="sqbox evenly flex-box coll_100 " :key="i" v-for="(item,i) in tableData">
 
                             <div class="titl flex-box center act padTop padBtm coll_20 cusor" :class="{
-                  isSamll:keyOpt[i].isSmall,
-                  isCli:keyOpt[i].isCli
+                  isSamll:keyOpt[i]?.isSmall,
+                  isCli:keyOpt[i]?.isCli
                   }" @click="toClick(item,i)" :key="i" v-for="(el,i) in  keyOpt"> 
                   
-                  <span class=" textOv">{{keyOpt[i].render?keyOpt[i].render(item[i]) : item[i]||'--'}}</span>
+                  <span class=" textOv">{{keyOpt[i]?.render?keyOpt[i]?.render(item[i]) : item[i]||'--'}}</span>
 
 
-                                <i class="" @click.stop="keyOpt[i].iconClick?keyOpt[i].iconClick():iconClick(item[i])"
-                                    :class="{['isCli '+keyOpt[i].icon]:keyOpt[i].icon}"></i>
+                                <i class="" @click.stop="keyOpt[i]?.iconClick?keyOpt[i].iconClick():iconClick(item[i])"
+                                    :class="{['isCli '+keyOpt[i]?.icon]:keyOpt[i].icon}"></i>
                             </div>
                         </div>
                     </div>

@@ -4,6 +4,7 @@
         <div class="tableDiv " :class="{
             pools:$route.params.id
         }">
+     
             <div class="tableBox  marTop ">
                 <!-- head -->
                 <div class="sqbox  evenly flex-box coll_100">

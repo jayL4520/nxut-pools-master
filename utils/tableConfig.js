@@ -37,12 +37,13 @@ export default {
      },
      dayMsg:{
        
-        time:{
+        timedate:{
             label:"日期",
             icon:'el-icon-arrow-right',
             isCli:true,
             render(e){
-                return  parseTime(e,'{y}-{m}-{d}')
+                console.log("ds",new Date(e))
+                return  e//parseTime(e,'{y}-{m}-{d}')
              },
             type:'day'
            },

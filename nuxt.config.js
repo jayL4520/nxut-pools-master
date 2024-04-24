@@ -98,7 +98,9 @@ export default {
     '@nuxtjs/proxy'
   ],
   server: {
-    default: 'localhost'
+    default: 'localhost',
+    port: 3003,
+    host: '0.0.0.0',
   },
   generate: {
     dir: 'pool-dist'

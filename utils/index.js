@@ -336,7 +336,7 @@ export const keyOpt = {
       hashid:"哈希"
     },
     dayMsg:{
-      time:'日期',
+      timedate:'日期',
       money:'收益',
       total:'总额',
       // id:'id',
